@@ -63,7 +63,7 @@ const AboutSection = () => {
                 <div className="text-gray-500 text-sm mt-1">Client Satisfaction</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-sky-600" style={{ color: '#025489' }}>20+</div>
+                <div className="text-4xl font-bold text-sky-600" style={{ color: '#025489' }}>200+</div>
                 <div className="text-gray-500 text-sm mt-1">Completed Projects</div>
               </div>
             </div>

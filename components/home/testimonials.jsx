@@ -11,7 +11,7 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       quote: "KALDESIGNS transformed our business data into actionable insights that helped us increase our revenue by 30% within six months. Their expertise in data analytics is exceptional.",
-      name: "Sarah Johnson",
+      name: "Massimo Johnson",
       title: "Marketing Director, TechCorp Ltd",
       image: "/assets/images/headshot2.jpg" 
     },

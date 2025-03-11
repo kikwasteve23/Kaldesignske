@@ -65,9 +65,6 @@ const Footer = () => {
                 <a href="#services" className="text-gray-400 hover:text-white transition-colors">Services</a>
               </li>
               <li>
-                <a href="#projects" className="text-gray-400 hover:text-white transition-colors">Projects</a>
-              </li>
-              <li>
                 <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
               </li>
             </ul>
@@ -87,7 +84,7 @@ const Footer = () => {
               <li className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
                 <a href="tel:+254715135503" className="text-gray-400 hover:text-white transition-colors">
-                  +254 715 135 503
+                  +254 745 751 939
                 </a>
               </li>
               <li className="flex items-center">
@@ -109,7 +106,7 @@ const Footer = () => {
           </div>
           
           <div className="text-gray-400 text-sm">
-            Designed & Developed by <span className="text-sky-500">Steven Kalungu Kikwa</span>
+            Designed & Developed by <span className="text-sky-500">Kaldesigns</span>
           </div>
         </div>
       </div>
