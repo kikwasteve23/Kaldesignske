@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script"; // ✅ Import Next.js Script component
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +20,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Voiceflow Chatbot Script */}
+        <Script id="voiceflow-widget" strategy="lazyOnload">
+          {`
+            (function(d, t) {
+              var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+              v.onload = function() {
+                window.voiceflow.chat.load({
+                  verify: { projectID: '687193e03a1a0682b85b68f5' },
+                  url: 'https://general-runtime.voiceflow.com',
+                  versionID: 'production',
+                  voice: {
+                    url: "https://runtime-api.voiceflow.com"
+                  }
+                });
+              };
+              v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+              v.type = "text/javascript";
+              s.parentNode.insertBefore(v, s);
+            })(document, 'script');
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
