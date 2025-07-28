@@ -3,7 +3,7 @@ import { Linkedin, Github, Mail } from "lucide-react";
 
 const teamMembers = [
   {
-    name: "Steven Kalungu Kikwa",
+    name: "Steven Kikwa",
     role: "Founder & Lead Data Scientist",
     description: "Passionate about transforming data into actionable insights. Steven leads our data science initiatives with expertise in machine learning, statistical modeling, and strategic business intelligence.",
     image: "/assets/kalungu.jpg",
@@ -16,7 +16,7 @@ const teamMembers = [
     role: "Software Engineer",
     description: "Full-stack developer with a passion for creating scalable, user-centric applications. Julius brings innovative solutions to complex technical challenges with modern web technologies.",
     image: "/assets/charles.jpg",
-    linkedin: "https://www.linkedin.com/in/julius-charles-24b91b89/?original_referer=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&originalSubdomain=ke",
+    linkedin: "https://www.linkedin.com/in/julius-charles-24b91b89/",
     github: "https://github.com/janedoe",
     specialty: "Full-Stack Development"
   },
