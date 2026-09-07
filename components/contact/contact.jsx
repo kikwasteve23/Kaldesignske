@@ -181,7 +181,7 @@ const ContactSection = () => {
             <button
               type="button"
               onClick={openWhatsApp}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#1faf58] px-5 py-3.5 font-semibold text-white transition-colors hover:bg-[#18964a] sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-[0.7rem] bg-[#1faf58] px-5 py-3.5 font-semibold text-white transition-colors hover:bg-[#18964a] sm:w-auto"
             >
               Chat on WhatsApp
             </button>

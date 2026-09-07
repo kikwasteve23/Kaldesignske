@@ -55,7 +55,7 @@ const Team = () => {
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
                   >
                     <Linkedin size={16} />
                     LinkedIn
@@ -64,7 +64,7 @@ const Team = () => {
                     href={member.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
                   >
                     <Github size={16} />
                     GitHub

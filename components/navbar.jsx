@@ -38,7 +38,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className="rounded-full border border-[var(--line)] p-2 text-ink md:hidden"
+            className="rounded-lg border border-[var(--line)] p-2 text-ink md:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
           >
