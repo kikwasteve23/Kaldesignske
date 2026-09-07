@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -14,11 +14,30 @@ const links = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="nav-blur border-b border-[var(--line)]">
+    <header className="fixed inset-x-0 top-0 z-[60]">
+      <nav className="nav-blur relative z-[61] border-b border-[var(--line)]">
         <div className="container-shell flex items-center justify-between py-3.5">
-          <a href="#hero" className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+          <a
+            href="#hero"
+            className="relative z-[62] font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl"
+            onClick={() => setOpen(false)}
+          >
             KALDESIGNS
           </a>
 
@@ -32,43 +51,49 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className="cta-primary !py-2.5 !px-4 text-sm">
+            <a href="#contact" className="cta-primary !px-4 !py-2.5 text-sm">
               Start a project
             </a>
           </div>
 
           <button
-            className="rounded-lg border border-[var(--line)] p-2 text-ink md:hidden"
-            onClick={() => setOpen((v) => !v)}
+            type="button"
+            className="relative z-[62] inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--line)] bg-paper text-ink pointer-events-auto md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
 
-        {open && (
-          <div className="border-t border-[var(--line)] bg-paper md:hidden">
-            <div className="container-shell flex flex-col gap-4 py-5">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-ink"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+        <div
+          id="mobile-nav"
+          className={`border-t border-[var(--line)] bg-paper md:hidden ${
+            open ? "block" : "hidden"
+          }`}
+        >
+          <div className="container-shell flex flex-col gap-4 py-5">
+            {links.map((link) => (
               <a
-                href="#contact"
-                className="cta-primary w-full"
+                key={link.href}
+                href={link.href}
+                className="text-base font-medium text-ink"
                 onClick={() => setOpen(false)}
               >
-                Start a project
+                {link.label}
               </a>
-            </div>
+            ))}
+            <a
+              href="#contact"
+              className="cta-primary w-full"
+              onClick={() => setOpen(false)}
+            >
+              Start a project
+            </a>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );

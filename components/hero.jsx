@@ -54,7 +54,7 @@ const HeroSection = () => {
               KALDESIGNS
             </p>
             <h1 className="reveal reveal-delay-1 mt-5 max-w-2xl font-display text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              Data analysis, automation, and software that remove manual work.
+              Data analysis, automation, and software that removes manual work.
             </h1>
             <p className="reveal reveal-delay-2 mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl">
               We help operators, founders, and product teams turn scattered
