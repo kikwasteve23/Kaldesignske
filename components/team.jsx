@@ -17,7 +17,7 @@ const teamMembers = [
       "Builds the product layer around your data: reliable web apps, integrations, and interfaces teams can operate without friction.",
     image: "/assets/charles.jpg",
     linkedin: "https://www.linkedin.com/in/julius-charles-24b91b89/",
-    github: "https://github.com/janedoe",
+    github: "https://github.com/1MjCee",
   },
 ];
 
