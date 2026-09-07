@@ -18,36 +18,10 @@ const subjects = [
   "Not sure — need advice",
 ];
 
-async function sendViaFormSubmit(formData) {
-  const response = await fetch(
-    "https://formsubmit.co/ajax/stevenkikwa@gmail.com",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        _subject: `[Kaldesigns] ${formData.subject}`,
-        message: formData.message,
-        _template: "table",
-        _captcha: "false",
-      }),
-    }
-  );
-
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok || data.success === "false" || data.success === false) {
-    throw new Error(
-      data.message ||
-        "FormSubmit could not deliver the message. Please WhatsApp or email us directly."
-    );
-  }
-
-  return data;
-}
+// Web3Forms access keys are public client keys by design.
+const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  "f6cb8448-2540-4a53-af8f-144dbc27920d";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -80,58 +54,75 @@ const ContactSection = () => {
     });
 
     try {
-      const apiResponse = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: `[Kaldesigns] ${formData.subject}`,
+          message: formData.message,
+          from_name: "Kaldesigns Website",
+          replyto: formData.email,
+        }),
       });
 
-      const apiData = await apiResponse.json().catch(() => ({}));
+      const data = await response.json().catch(() => ({}));
 
-      if (apiResponse.ok && apiData.ok) {
-        setFormStatus({
-          isSubmitting: false,
-          submitted: true,
-          success: true,
-          message:
-            "Message sent. We typically reply within one business day.",
-        });
-        setFormData({
-          name: "",
-          email: "",
-          subject: subjects[0],
-          message: "",
-        });
-        return;
+      if (!response.ok || data.success === false) {
+        throw new Error(
+          data.message || "Could not send your message. Please try WhatsApp."
+        );
       }
 
-      // Fallback when SMTP/Web3Forms secrets are not configured yet
-      if (apiResponse.status === 503 && apiData.fallback === "formsubmit") {
-        const formSubmitData = await sendViaFormSubmit(formData);
-        const activationHint =
-          typeof formSubmitData.message === "string" &&
-          formSubmitData.message.toLowerCase().includes("activate")
-            ? " Check stevenkikwa@gmail.com (and spam) for a FormSubmit activation link, then submit once more."
-            : "";
-
-        setFormStatus({
-          isSubmitting: false,
-          submitted: true,
-          success: true,
-          message: `Message accepted.${activationHint}`,
-        });
-        setFormData({
-          name: "",
-          email: "",
-          subject: subjects[0],
-          message: "",
-        });
-        return;
-      }
-
-      throw new Error(apiData.error || "Could not send your message.");
+      setFormStatus({
+        isSubmitting: false,
+        submitted: true,
+        success: true,
+        message:
+          "Message sent to stevenkikwa@gmail.com. We typically reply within one business day.",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        subject: subjects[0],
+        message: "",
+      });
     } catch (error) {
       console.error("Error sending email:", error);
+
+      // Optional server-side Gmail path if configured
+      try {
+        const apiResponse = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        const apiData = await apiResponse.json().catch(() => ({}));
+        if (apiResponse.ok && apiData.ok) {
+          setFormStatus({
+            isSubmitting: false,
+            submitted: true,
+            success: true,
+            message:
+              "Message sent to stevenkikwa@gmail.com. We typically reply within one business day.",
+          });
+          setFormData({
+            name: "",
+            email: "",
+            subject: subjects[0],
+            message: "",
+          });
+          return;
+        }
+      } catch {
+        // ignore secondary failure
+      }
+
       setFormStatus({
         isSubmitting: false,
         submitted: true,
@@ -257,7 +248,16 @@ const ContactSection = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm font-semibold text-ink">

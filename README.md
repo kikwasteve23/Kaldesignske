@@ -33,15 +33,15 @@ Open [http://127.0.0.1:43123](http://127.0.0.1:43123).
 
 ## Contact form
 
-The form posts to `/api/contact`, which delivers mail via:
+The form submits **from the browser** to [Web3Forms](https://web3forms.com) (free plan requires client-side).
 
-1. **Web3Forms** if `WEB3FORMS_ACCESS_KEY` is set (recommended)
-2. **Gmail SMTP** if `GMAIL_APP_PASSWORD` is set
-3. **FormSubmit AJAX fallback** in the browser if neither secret is configured
+Set in `.env.local` / Vercel:
 
-For Vercel, add the same env vars in Project Settings → Environment Variables, then redeploy.
+```bash
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-key
+```
 
-If you use the FormSubmit fallback for the first time, open `stevenkikwa@gmail.com` (including spam) and click the FormSubmit activation link, then submit again.
+Optional backup: configure `GMAIL_APP_PASSWORD` for the `/api/contact` Gmail path.
 
 ## Scripts
 

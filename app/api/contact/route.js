@@ -7,33 +7,10 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-async function sendWithWeb3Forms({ name, email, subject, message }) {
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-  if (!accessKey) return null;
-
-  const response = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      access_key: accessKey,
-      name,
-      email,
-      subject: `[Kaldesigns] ${subject}`,
-      message,
-      from_name: "Kaldesigns Website",
-      replyto: email,
-    }),
-  });
-
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok || data.success === false) {
-    throw new Error(data.message || "Web3Forms rejected the submission.");
-  }
-
-  return { provider: "web3forms" };
+async function sendWithWeb3Forms() {
+  // Free Web3Forms plans require browser/client submissions.
+  // Server-side calls are rejected unless on the Pro plan.
+  return null;
 }
 
 async function sendWithGmail({ name, email, subject, message }) {
