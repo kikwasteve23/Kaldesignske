@@ -1,26 +1,198 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #102018;
+  --ink-soft: #1c3328;
+  --forest: #1f6b4a;
+  --forest-deep: #134833;
+  --mint: #d7eee3;
+  --mist: #eef6f1;
+  --sand: #f7f3ea;
+  --amber: #c9782a;
+  --amber-deep: #a35f1c;
+  --paper: #fbfaf6;
+  --line: rgba(16, 32, 24, 0.12);
+  --muted: #5c6f64;
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-forest: var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-mint: var(--mint);
+  --color-mist: var(--mist);
+  --color-sand: var(--sand);
+  --color-amber: var(--amber);
+  --color-amber-deep: var(--amber-deep);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--forest) 28%, white);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.section-pad {
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+.container-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--forest-deep);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.4rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise-in 0.8s ease forwards;
+}
+
+.reveal-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.reveal-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.reveal-delay-3 {
+  animation-delay: 0.36s;
+}
+
+@keyframes rise-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0) scale(1.04);
+  }
+}
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.hero-glow {
+  animation: drift 18s ease-in-out infinite;
+}
+
+.pipeline-pulse {
+  animation: pulse-line 3.2s ease-in-out infinite;
+}
+
+.nav-blur {
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--amber);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: var(--amber-deep);
+  transform: translateY(-1px);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid color-mix(in srgb, white 55%, transparent);
+  color: white;
+  font-weight: 600;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cta-secondary:hover {
+  background: color-mix(in srgb, white 12%, transparent);
+  border-color: white;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field:focus {
+  border-color: var(--forest);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--forest) 18%, transparent);
 }

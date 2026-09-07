@@ -1,113 +1,89 @@
-"use client"
-import React from 'react';
-import { Github, Mail, Phone, MapPin, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-900 text-white">
-      {/* Main footer content */}
-      <div className="container mx-auto px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Column 1: About */}
+    <footer className="bg-ink text-white">
+      <div className="container-shell py-14">
+        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <h3 className="text-xl font-bold mb-6">KALDESIGNS</h3>
-            <p className="text-gray-400 mb-6">
-              Transforming data into powerful insights to help businesses make informed decisions.
+            <p className="font-display text-2xl font-bold tracking-tight">KALDESIGNS</p>
+            <p className="mt-4 max-w-sm leading-relaxed text-white/65">
+              Data analysis, automation, and software engineering for teams that
+              need reliable systems — not a catch-all agency menu.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://github.com/kikwasteve23" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Github className="w-5 h-5" />
+            <div className="mt-6 flex gap-4">
+              <a
+                href="https://github.com/kikwasteve23"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/65 transition-colors hover:text-white"
+                aria-label="GitHub"
+              >
+                <Github size={18} />
               </a>
-              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a
+                href="https://www.linkedin.com/in/kalungu-steve-a056b6149"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/65 transition-colors hover:text-white"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
               </a>
             </div>
           </div>
-          
-          {/* Column 2: Services */}
+
           <div>
-            <h3 className="text-xl font-bold mb-6">Services</h3>
-            <ul className="space-y-3">
+            <h3 className="font-display text-lg font-bold">Services</h3>
+            <ul className="mt-4 space-y-3 text-white/65">
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Data Analysis</a>
+                <a href="#services" className="hover:text-white">
+                  Data Analysis
+                </a>
               </li>
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Machine Learning</a>
+                <a href="#services" className="hover:text-white">
+                  Data Science & Automation
+                </a>
               </li>
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Data Visualization</a>
-              </li>
-              <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Statistical Modeling</a>
-              </li>
-              <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Business Intelligence</a>
+                <a href="#services" className="hover:text-white">
+                  Software Engineering
+                </a>
               </li>
             </ul>
           </div>
-          
-          {/* Column 3: Quick Links */}
+
           <div>
-            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="#home" className="text-gray-400 hover:text-white transition-colors">Home</a>
+            <h3 className="font-display text-lg font-bold">Contact</h3>
+            <ul className="mt-4 space-y-4 text-white/65">
+              <li className="flex items-start gap-3">
+                <MapPin size={16} className="mt-1 shrink-0" />
+                Ruiru, Kiambu, Kenya
               </li>
-              <li>
-                <a href="#about" className="text-gray-400 hover:text-white transition-colors">About</a>
-              </li>
-              <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">Services</a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Column 4: Contact Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-6">Contact</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <MapPin className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0 mt-1" />
-                <span className="text-gray-400">
-                  399, Ruiru-Kiambu Road,<br />
-                  Kiambu, 00232, Kenya
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
-                <a href="tel:+254715135503" className="text-gray-400 hover:text-white transition-colors">
+              <li className="flex items-center gap-3">
+                <Phone size={16} className="shrink-0" />
+                <a href="tel:+254745751939" className="hover:text-white">
                   +254 745 751 939
                 </a>
               </li>
-              <li className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 text-gray-400 flex-shrink-0" />
-                <a href="mailto:Stevenkikwa@gmail.com" className="text-gray-400 hover:text-white transition-colors">
-                  Stevenkikwa@gmail.com
+              <li className="flex items-center gap-3">
+                <Mail size={16} className="shrink-0" />
+                <a href="mailto:stevenkikwa@gmail.com" className="hover:text-white">
+                  stevenkikwa@gmail.com
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      
-      {/* Bottom bar */}
-      <div className="border-t border-gray-800 py-6">
-        <div className="container mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} KALDESIGNS. All rights reserved.
-          </div>
-          
-          <div className="text-gray-400 text-sm">
-            Designed & Developed by <span className="text-sky-500">Kaldesigns</span>
-          </div>
+
+      <div className="border-t border-white/10">
+        <div className="container-shell flex flex-col gap-2 py-5 text-sm text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Kaldesigns. All rights reserved.</p>
+          <p>Analysis · Automation · Software</p>
         </div>
       </div>
     </footer>

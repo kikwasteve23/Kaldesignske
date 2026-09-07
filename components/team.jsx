@@ -1,113 +1,79 @@
-import React from "react";
-import { Linkedin, Github, Mail } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 const teamMembers = [
   {
     name: "Steven Kikwa",
-    role: "Founder & Lead Data Scientist",
-    description: "Passionate about transforming data into actionable insights. Steven leads our data science initiatives with expertise in machine learning, statistical modeling, and strategic business intelligence.",
+    role: "Founder · Data Science & Automation",
+    description:
+      "Leads analysis and automation engagements — from cleaning messy sources to shipping pipelines, models, and decision-ready reporting.",
     image: "/assets/kalungu.jpg",
-    linkedin: "www.linkedin.com/in/kalungu-steve-a056b6149",
+    linkedin: "https://www.linkedin.com/in/kalungu-steve-a056b6149",
     github: "https://github.com/kikwasteve23",
-    specialty: "Data Science & ML"
   },
   {
     name: "Julius Charles",
     role: "Software Engineer",
-    description: "Full-stack developer with a passion for creating scalable, user-centric applications. Julius brings innovative solutions to complex technical challenges with modern web technologies.",
+    description:
+      "Builds the product layer around your data: reliable web apps, integrations, and interfaces teams can operate without friction.",
     image: "/assets/charles.jpg",
     linkedin: "https://www.linkedin.com/in/julius-charles-24b91b89/",
     github: "https://github.com/janedoe",
-    specialty: "Full-Stack Development"
   },
 ];
 
 const Team = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white" id="team">
-      <div className="container mx-auto px-6 text-center">
-        {/* Header */}
-        <div className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            Meet Our Team
+    <section id="team" className="section-pad bg-paper">
+      <div className="container-shell">
+        <div className="max-w-2xl">
+          <p className="eyebrow">Team</p>
+          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
+            Small team. Direct ownership.
           </h2>
-          <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#025489' }}></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Talented individuals working together to deliver exceptional results
+          <p className="mt-5 text-lg leading-relaxed text-[var(--muted)]">
+            You work with the people building the system — not a rotating
+            account layer.
           </p>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-500 p-8 hover:-translate-y-1"
-            >
-              {/* Profile Image with Gradient Border */}
-              <div className="relative mb-6">
-                <div className="w-32 h-32 mx-auto rounded-full p-1" style={{ background: '#025489' }}>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full rounded-full object-cover border-4 border-white"
-                  />
-                </div>
-                {/* Specialty Badge */}
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                  <span className="inline-block text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md" style={{ background: '#025489' }}>
-                    {member.specialty}
-                  </span>
-                </div>
+        <div className="mt-14 grid gap-10 md:grid-cols-2">
+          {teamMembers.map((member) => (
+            <article key={member.name} className="grid gap-6 sm:grid-cols-[9.5rem_1fr] sm:items-start">
+              <div className="relative h-40 w-40 overflow-hidden rounded-[1.4rem] sm:h-[9.5rem] sm:w-[9.5rem]">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="h-full w-full object-cover"
+                />
               </div>
-
-              {/* Content */}
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="font-semibold text-lg" style={{ color: '#025489' }}>
-                    {member.role}
-                  </p>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed text-left">
-                  {member.description}
-                </p>
-
-                {/* Social Links */}
-                <div className="flex justify-center gap-4 pt-4">
+              <div>
+                <h3 className="font-display text-2xl font-bold text-ink">{member.name}</h3>
+                <p className="mt-1 font-semibold text-forest">{member.role}</p>
+                <p className="mt-4 leading-relaxed text-[var(--muted)]">{member.description}</p>
+                <div className="mt-5 flex gap-3">
                   <a
-                    href={`https://${member.linkedin}`}
+                    href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link flex items-center gap-2 text-white hover:shadow-lg px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
-                    style={{ backgroundColor: '#025489' }}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
                   >
-                    <Linkedin size={18} />
-                    <span className="text-sm font-medium">LinkedIn</span>
+                    <Linkedin size={16} />
+                    LinkedIn
                   </a>
                   <a
                     href={member.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
                   >
-                    <Github size={18} />
-                    <span className="text-sm font-medium">GitHub</span>
+                    <Github size={16} />
+                    GitHub
                   </a>
                 </div>
               </div>
-
-              {/* Hover Effect Overlay */}
-              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'rgba(2, 84, 137, 0.02)' }}></div>
-            </div>
+            </article>
           ))}
         </div>
-
-
       </div>
     </section>
   );

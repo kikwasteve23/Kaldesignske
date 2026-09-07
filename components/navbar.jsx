@@ -1,86 +1,76 @@
-"use client"
-import React, { useState } from 'react';
-import { Menu } from 'lucide-react';
+"use client";
+
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+const links = [
+  { href: "#about", label: "Focus" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#work", label: "Work" },
+  { href: "#team", label: "Team" },
+];
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <div className="flex items-center">
-            <span className="text-2xl font-bold" style={{ color: '#025489' }}>Kaldesigns</span>
-          </div>
-          
-          {/* Desktop Navigation - Centered */}
-          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <a href="#hero" className="text-gray-700 hover:text-sky-600 transition-colors duration-300">Home</a>
-            <a href="#about" className="text-gray-700 hover:text-sky-600 transition-colors duration-300">About</a>
-            <a href="#contact" className="text-gray-700 hover:text-sky-600 transition-colors duration-300">Contact Us</a>
-          </div>
-          
-          {/* Empty div to maintain flex spacing */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-4">
-              <a href="tel:+1234567890" className="text-gray-700 hover:text-sky-600 transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-                (+254) 745 751 939
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav className="nav-blur border-b border-[var(--line)]">
+        <div className="container-shell flex items-center justify-between py-3.5">
+          <a href="#hero" className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+            KALDESIGNS
+          </a>
+
+          <div className="hidden items-center gap-8 md:flex">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-[var(--muted)] transition-colors hover:text-ink"
+              >
+                {link.label}
               </a>
-              <a href="mailto:example@example.com" className="text-gray-700 hover:text-sky-600 transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                stevenkikwa@gmail.com
-              </a>
-            </div>
+            ))}
+            <a href="#contact" className="cta-primary !py-2.5 !px-4 text-sm">
+              Start a project
+            </a>
           </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 focus:outline-none"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
+
+          <button
+            className="rounded-full border border-[var(--line)] p-2 text-ink md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-        
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 bg-gray-50">
-            <div className="flex flex-col space-y-4 px-4">
-              <a 
-                href="#home" 
-                className="text-gray-700 hover:text-sky-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
+
+        {open && (
+          <div className="border-t border-[var(--line)] bg-paper md:hidden">
+            <div className="container-shell flex flex-col gap-4 py-5">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-base font-medium text-ink"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="cta-primary w-full"
+                onClick={() => setOpen(false)}
               >
-                Home
-              </a>
-              <a 
-                href="#about" 
-                className="text-gray-700 hover:text-sky-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </a>
-              <a 
-                href="#contact" 
-                className="text-gray-700 hover:text-sky-600 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact Us
+                Start a project
               </a>
             </div>
           </div>
         )}
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
