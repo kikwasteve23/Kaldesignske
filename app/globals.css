@@ -47,6 +47,7 @@
   --color-muted: var(--muted);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
+  --font-brand: var(--font-brand);
 }
 
 * {
@@ -71,6 +72,11 @@ body {
 
 .font-display {
   font-family: var(--font-display), sans-serif;
+}
+
+.font-brand {
+  font-family: var(--font-brand), sans-serif;
+  letter-spacing: 0.04em;
 }
 
 .section-pad {

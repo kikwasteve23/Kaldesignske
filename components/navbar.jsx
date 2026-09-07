@@ -43,7 +43,7 @@ const Navbar = () => {
               alt="Kaldesigns logo"
               className="h-9 w-9 object-contain sm:h-10 sm:w-10"
             />
-            <span className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+            <span className="font-brand text-xl font-bold tracking-[0.06em] text-ink sm:text-2xl">
               KALDESIGNS
             </span>
           </a>

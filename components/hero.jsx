@@ -50,7 +50,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex min-h-[100svh] items-end pb-16 pt-28 sm:items-center sm:pb-24">
         <div className="container-shell w-full">
           <div className="max-w-3xl">
-            <p className="reveal font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            <p className="reveal font-brand text-4xl font-bold tracking-[0.06em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
               KALDESIGNS
             </p>
             <h1 className="reveal reveal-delay-1 mt-5 max-w-2xl font-display text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">

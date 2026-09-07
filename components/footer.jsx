@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container-shell py-14">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-display text-2xl font-bold tracking-tight flex items-center gap-2.5">
+            <p className="font-brand text-2xl font-bold tracking-[0.06em] flex items-center gap-2.5">
               <img src="/assets/logo.jpg" alt="" className="h-8 w-8 rounded-sm bg-white object-contain p-0.5" />
               KALDESIGNS
             </p>

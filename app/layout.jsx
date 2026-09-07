@@ -1,11 +1,17 @@
-import { Syne, Figtree } from "next/font/google";
+import { Space_Grotesk, Figtree } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 
-const display = Syne({
+const brand = Space_Grotesk({
+  variable: "--font-brand",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const display = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const body = Figtree({
@@ -72,7 +78,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${display.variable} ${body.variable} antialiased`}>
+      <body className={`${brand.variable} ${display.variable} ${body.variable} antialiased`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5B8CJWZH"
