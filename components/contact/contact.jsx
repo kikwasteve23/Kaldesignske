@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Mail,
   Phone,
@@ -8,7 +8,6 @@ import {
   Send,
   Check,
   AlertCircle,
-  Loader,
 } from "lucide-react";
 
 const subjects = [
@@ -24,115 +23,22 @@ const WEB3FORMS_ACCESS_KEY =
   "f6cb8448-2540-4a53-af8f-144dbc27920d";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: subjects[0],
-    message: "",
-  });
+  const [redirectUrl, setRedirectUrl] = useState(
+    "https://kaldesigns.vercel.app/?sent=1#contact"
+  );
+  const [sentBanner, setSentBanner] = useState(false);
 
-  const [formStatus, setFormStatus] = useState({
-    isSubmitting: false,
-    submitted: false,
-    success: false,
-    message: "",
-  });
+  useEffect(() => {
+    const origin = window.location.origin;
+    setRedirectUrl(`${origin}/?sent=1#contact`);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setFormStatus({
-      isSubmitting: true,
-      submitted: false,
-      success: false,
-      message: "",
-    });
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          name: formData.name,
-          email: formData.email,
-          subject: `[Kaldesigns] ${formData.subject}`,
-          message: formData.message,
-          from_name: "Kaldesigns Website",
-          replyto: formData.email,
-        }),
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok || data.success === false) {
-        throw new Error(
-          data.message || "Could not send your message. Please try WhatsApp."
-        );
-      }
-
-      setFormStatus({
-        isSubmitting: false,
-        submitted: true,
-        success: true,
-        message:
-          "Message sent to stevenkikwa@gmail.com. We typically reply within one business day.",
-      });
-      setFormData({
-        name: "",
-        email: "",
-        subject: subjects[0],
-        message: "",
-      });
-    } catch (error) {
-      console.error("Error sending email:", error);
-
-      // Optional server-side Gmail path if configured
-      try {
-        const apiResponse = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        const apiData = await apiResponse.json().catch(() => ({}));
-        if (apiResponse.ok && apiData.ok) {
-          setFormStatus({
-            isSubmitting: false,
-            submitted: true,
-            success: true,
-            message:
-              "Message sent to stevenkikwa@gmail.com. We typically reply within one business day.",
-          });
-          setFormData({
-            name: "",
-            email: "",
-            subject: subjects[0],
-            message: "",
-          });
-          return;
-        }
-      } catch {
-        // ignore secondary failure
-      }
-
-      setFormStatus({
-        isSubmitting: false,
-        submitted: true,
-        success: false,
-        message:
-          error.message ||
-          "Something went wrong. Email stevenkikwa@gmail.com or WhatsApp us instead.",
-      });
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("sent") === "1") {
+      setSentBanner(true);
+      // Clean the query without losing the hash section.
+      window.history.replaceState({}, "", `${origin}/#contact`);
     }
-  };
+  }, []);
 
   const openWhatsApp = () => {
     const phone = "254745751939";
@@ -231,24 +137,28 @@ const ContactSection = () => {
               Send a project brief
             </h3>
 
-            {formStatus.submitted && (
-              <div
-                className={`mt-5 flex items-start gap-2 rounded-xl px-4 py-3 text-sm ${
-                  formStatus.success
-                    ? "border border-brand/20 bg-sky text-brand-deep"
-                    : "border border-red-200 bg-red-50 text-red-800"
-                }`}
-              >
-                {formStatus.success ? (
-                  <Check className="mt-0.5 shrink-0" size={16} />
-                ) : (
-                  <AlertCircle className="mt-0.5 shrink-0" size={16} />
-                )}
-                <span>{formStatus.message}</span>
+            {sentBanner && (
+              <div className="mt-5 flex items-start gap-2 rounded-xl border border-brand/20 bg-sky px-4 py-3 text-sm text-brand-deep">
+                <Check className="mt-0.5 shrink-0" size={16} />
+                <span>
+                  Message sent to stevenkikwa@gmail.com. We typically reply
+                  within one business day.
+                </span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
+            {/*
+              Native POST avoids Cloudflare/CORS issues with fetch on the free plan.
+              Web3Forms redirects back via the hidden `redirect` field.
+            */}
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              className="mt-6 space-y-5"
+            >
+              <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+              <input type="hidden" name="from_name" value="Kaldesigns Website" />
+              <input type="hidden" name="redirect" value={redirectUrl} />
               <input
                 type="checkbox"
                 name="botcheck"
@@ -266,8 +176,6 @@ const ContactSection = () => {
                   <input
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     className="field"
                     placeholder="Your name"
                     required
@@ -281,8 +189,6 @@ const ContactSection = () => {
                     id="email"
                     name="email"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     className="field"
                     placeholder="you@company.com"
                     required
@@ -297,13 +203,12 @@ const ContactSection = () => {
                 <select
                   id="subject"
                   name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
                   className="field"
+                  defaultValue={subjects[0]}
                   required
                 >
                   {subjects.map((subject) => (
-                    <option key={subject} value={subject}>
+                    <option key={subject} value={`[Kaldesigns] ${subject}`}>
                       {subject}
                     </option>
                   ))}
@@ -317,8 +222,6 @@ const ContactSection = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   rows={6}
                   className="field resize-y"
                   placeholder="What is broken today? Which tools do you use (Power BI, Tableau, Spark, warehouses…)? Any timeline?"
@@ -326,23 +229,18 @@ const ContactSection = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={formStatus.isSubmitting}
-                className="cta-primary w-full sm:w-auto"
-              >
-                {formStatus.isSubmitting ? (
-                  <>
-                    <Loader className="animate-spin" size={18} />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send message
-                    <Send size={18} />
-                  </>
-                )}
+              <button type="submit" className="cta-primary w-full sm:w-auto">
+                Send message
+                <Send size={18} />
               </button>
+
+              {!sentBanner && (
+                <p className="flex items-start gap-2 text-xs text-[var(--muted)]">
+                  <AlertCircle size={14} className="mt-0.5 shrink-0" />
+                  Submissions go to stevenkikwa@gmail.com via Web3Forms. Check spam
+                  if you are testing the form yourself.
+                </p>
+              )}
             </form>
           </div>
         </div>
