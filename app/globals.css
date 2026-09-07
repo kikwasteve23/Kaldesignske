@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #102018;
-  --ink-soft: #1c3328;
-  --forest: #1f6b4a;
-  --forest-deep: #134833;
-  --mint: #d7eee3;
-  --mist: #eef6f1;
-  --sand: #f7f3ea;
-  --amber: #c9782a;
-  --amber-deep: #a35f1c;
-  --paper: #fbfaf6;
-  --line: rgba(16, 32, 24, 0.12);
-  --muted: #5c6f64;
+  /* Logo navy #03548b as brand anchor */
+  --brand: #03548b;
+  --brand-deep: #023a5f;
+  --brand-soft: #2f6f9d;
+  --ink: #0a1f33;
+  --ink-soft: #1a334a;
+  --sky: #d9e8f4;
+  --mist: #eef4f8;
+  --wash: #f3f7fb;
+  --paper: #f8fbfd;
+  --line: rgba(10, 31, 51, 0.12);
+  --muted: #5a6f82;
   --background: var(--paper);
   --foreground: var(--ink);
+
+  /* Back-compat aliases used across components */
+  --forest: var(--brand);
+  --forest-deep: var(--brand-deep);
+  --mint: var(--sky);
+  --sand: var(--wash);
+  --amber: var(--brand);
+  --amber-deep: var(--brand-deep);
 }
 
 @theme inline {
@@ -22,11 +30,16 @@
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
   --color-forest: var(--forest);
   --color-forest-deep: var(--forest-deep);
   --color-mint: var(--mint);
   --color-mist: var(--mist);
   --color-sand: var(--sand);
+  --color-sky: var(--sky);
+  --color-wash: var(--wash);
   --color-amber: var(--amber);
   --color-amber-deep: var(--amber-deep);
   --color-paper: var(--paper);
@@ -52,7 +65,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--forest) 28%, white);
+  background: color-mix(in srgb, var(--brand) 28%, white);
   color: var(--ink);
 }
 
@@ -77,7 +90,7 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--forest-deep);
+  color: var(--brand-deep);
 }
 
 .eyebrow::before {
@@ -141,7 +154,7 @@ body {
 }
 
 .nav-blur {
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(14px);
 }
 
@@ -150,7 +163,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  background: var(--amber);
+  background: var(--brand);
   color: #fff;
   font-weight: 600;
   padding: 0.95rem 1.4rem;
@@ -159,7 +172,7 @@ body {
 }
 
 .cta-primary:hover {
-  background: var(--amber-deep);
+  background: var(--brand-deep);
   transform: translateY(-1px);
 }
 
@@ -193,6 +206,6 @@ body {
 }
 
 .field:focus {
-  border-color: var(--forest);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--forest) 18%, transparent);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);
 }

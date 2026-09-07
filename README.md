@@ -1,6 +1,6 @@
 # Kaldesigns
 
-Client-facing site for **Kaldesigns** — focused on data analysis, data science automation, and software engineering.
+Client-facing site for **Kaldesigns** — data analysis (BI & big-data visualization), automation-focused data science, and software engineering.
 
 Live site: [https://kaldesigns.vercel.app/](https://kaldesigns.vercel.app/)
 
@@ -8,11 +8,9 @@ Live site: [https://kaldesigns.vercel.app/](https://kaldesigns.vercel.app/)
 
 Kaldesigns helps operators, founders, and product teams:
 
-- turn messy data into decision-ready analysis
+- analyze and visualize data with BI tools and big-data stacks
 - automate reporting and operational workflows
 - ship custom software and internal tools around real processes
-
-Branding / logo / generic design services are intentionally out of scope on this site.
 
 ## Stack
 
@@ -20,15 +18,30 @@ Branding / logo / generic design services are intentionally out of scope on this
 - React 19
 - Tailwind CSS 4
 - Lucide icons
+- Nodemailer (optional Gmail delivery)
 
 ## Run locally
 
 ```bash
 npm install
+cp .env.example .env.local
+# add WEB3FORMS_ACCESS_KEY or GMAIL_APP_PASSWORD
 npm run dev -- --port 43123
 ```
 
 Open [http://127.0.0.1:43123](http://127.0.0.1:43123).
+
+## Contact form
+
+The form posts to `/api/contact`, which delivers mail via:
+
+1. **Web3Forms** if `WEB3FORMS_ACCESS_KEY` is set (recommended)
+2. **Gmail SMTP** if `GMAIL_APP_PASSWORD` is set
+3. **FormSubmit AJAX fallback** in the browser if neither secret is configured
+
+For Vercel, add the same env vars in Project Settings → Environment Variables, then redeploy.
+
+If you use the FormSubmit fallback for the first time, open `stevenkikwa@gmail.com` (including spam) and click the FormSubmit activation link, then submit again.
 
 ## Scripts
 
@@ -36,9 +49,3 @@ Open [http://127.0.0.1:43123](http://127.0.0.1:43123).
 - `npm run build` — production build
 - `npm start` — serve production build
 - `npm run lint` — ESLint
-
-## Contact plumbing
-
-- Contact form posts via [FormSubmit](https://formsubmit.co/) to `stevenkikwa@gmail.com`
-- WhatsApp CTA uses `+254 745 751 939`
-- Google Tag Manager and Voiceflow widget IDs are preserved from the previous site

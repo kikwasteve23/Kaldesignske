@@ -1,8 +1,8 @@
 const engagements = [
   {
-    label: "Operations reporting",
+    label: "BI & reporting",
     outcome:
-      "Replace fragile weekly spreadsheet packs with a scheduled pipeline and a dashboard leadership trusts.",
+      "Replace fragile weekly spreadsheet packs with Power BI / Tableau dashboards and a pipeline leadership trusts.",
   },
   {
     label: "Workflow automation",
@@ -20,9 +20,9 @@ const EngagementsSection = () => {
   return (
     <section
       id="work"
-      className="section-pad relative overflow-hidden bg-[linear-gradient(160deg,var(--sand)_0%,var(--paper)_45%,var(--mint)_100%)]"
+      className="section-pad relative overflow-hidden bg-[linear-gradient(160deg,var(--wash)_0%,var(--paper)_45%,var(--sky)_100%)]"
     >
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_70%_40%,rgba(31,107,74,0.16),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_70%_40%,rgba(3,84,139,0.14),transparent_60%)]" />
 
       <div className="container-shell relative">
         <div className="max-w-2xl">

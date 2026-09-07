@@ -35,10 +35,17 @@ const Navbar = () => {
         <div className="container-shell flex items-center justify-between py-3.5">
           <a
             href="#hero"
-            className="relative z-[62] font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl"
+            className="relative z-[62] flex items-center gap-2.5"
             onClick={() => setOpen(false)}
           >
-            KALDESIGNS
+            <img
+              src="/assets/logo.jpg"
+              alt="Kaldesigns logo"
+              className="h-9 w-9 object-contain sm:h-10 sm:w-10"
+            />
+            <span className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+              KALDESIGNS
+            </span>
           </a>
 
           <div className="hidden items-center gap-8 md:flex">

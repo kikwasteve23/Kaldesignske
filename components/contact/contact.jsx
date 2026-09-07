@@ -12,11 +12,42 @@ import {
 } from "lucide-react";
 
 const subjects = [
-  "Data analysis project",
+  "Data analysis / BI / visualization",
   "Automation / data pipeline",
   "Software engineering build",
   "Not sure — need advice",
 ];
+
+async function sendViaFormSubmit(formData) {
+  const response = await fetch(
+    "https://formsubmit.co/ajax/stevenkikwa@gmail.com",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        _subject: `[Kaldesigns] ${formData.subject}`,
+        message: formData.message,
+        _template: "table",
+        _captcha: "false",
+      }),
+    }
+  );
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok || data.success === "false" || data.success === false) {
+    throw new Error(
+      data.message ||
+        "FormSubmit could not deliver the message. Please WhatsApp or email us directly."
+    );
+  }
+
+  return data;
+}
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -49,50 +80,56 @@ const ContactSection = () => {
     });
 
     try {
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = "https://formsubmit.co/stevenkikwa@gmail.com";
-      form.style.display = "none";
-
-      const fields = {
-        name: formData.name,
-        email: formData.email,
-        _subject: `[Kaldesigns] ${formData.subject}`,
-        message: formData.message,
-        _template: "box",
-        _next: window.location.href.split("#")[0] + "#contact",
-        _honey: "",
-      };
-
-      Object.entries(fields).forEach(([key, value]) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
+      const apiResponse = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      document.body.appendChild(form);
-      form.submit();
+      const apiData = await apiResponse.json().catch(() => ({}));
 
-      setFormStatus({
-        isSubmitting: false,
-        submitted: true,
-        success: true,
-        message:
-          "Thanks — your message is on its way. We typically reply within one business day.",
-      });
+      if (apiResponse.ok && apiData.ok) {
+        setFormStatus({
+          isSubmitting: false,
+          submitted: true,
+          success: true,
+          message:
+            "Message sent. We typically reply within one business day.",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          subject: subjects[0],
+          message: "",
+        });
+        return;
+      }
 
-      setFormData({
-        name: "",
-        email: "",
-        subject: subjects[0],
-        message: "",
-      });
+      // Fallback when SMTP/Web3Forms secrets are not configured yet
+      if (apiResponse.status === 503 && apiData.fallback === "formsubmit") {
+        const formSubmitData = await sendViaFormSubmit(formData);
+        const activationHint =
+          typeof formSubmitData.message === "string" &&
+          formSubmitData.message.toLowerCase().includes("activate")
+            ? " Check stevenkikwa@gmail.com (and spam) for a FormSubmit activation link, then submit once more."
+            : "";
 
-      setTimeout(() => {
-        if (document.body.contains(form)) document.body.removeChild(form);
-      }, 1000);
+        setFormStatus({
+          isSubmitting: false,
+          submitted: true,
+          success: true,
+          message: `Message accepted.${activationHint}`,
+        });
+        setFormData({
+          name: "",
+          email: "",
+          subject: subjects[0],
+          message: "",
+        });
+        return;
+      }
+
+      throw new Error(apiData.error || "Could not send your message.");
     } catch (error) {
       console.error("Error sending email:", error);
       setFormStatus({
@@ -100,7 +137,8 @@ const ContactSection = () => {
         submitted: true,
         success: false,
         message:
-          "Something went wrong sending the form. Email stevenkikwa@gmail.com or WhatsApp us instead.",
+          error.message ||
+          "Something went wrong. Email stevenkikwa@gmail.com or WhatsApp us instead.",
       });
     }
   };
@@ -134,7 +172,7 @@ const ContactSection = () => {
             <div className="space-y-5">
               <a
                 href="mailto:stevenkikwa@gmail.com"
-                className="flex items-start gap-4 text-ink transition-colors hover:text-forest"
+                className="flex items-start gap-4 text-ink transition-colors hover:text-brand"
               >
                 <span className="mt-0.5 rounded-xl bg-white p-3 shadow-sm">
                   <Mail size={18} />
@@ -149,7 +187,7 @@ const ContactSection = () => {
 
               <a
                 href="tel:+254745751939"
-                className="flex items-start gap-4 text-ink transition-colors hover:text-forest"
+                className="flex items-start gap-4 text-ink transition-colors hover:text-brand"
               >
                 <span className="mt-0.5 rounded-xl bg-white p-3 shadow-sm">
                   <Phone size={18} />
@@ -197,7 +235,7 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <div className="rounded-[1.6rem] bg-white p-6 shadow-[0_20px_50px_rgba(16,32,24,0.06)] sm:p-8">
+          <div className="rounded-[1.6rem] bg-white p-6 shadow-[0_20px_50px_rgba(10,31,51,0.06)] sm:p-8">
             <h3 className="font-display text-2xl font-bold text-ink">
               Send a project brief
             </h3>
@@ -206,7 +244,7 @@ const ContactSection = () => {
               <div
                 className={`mt-5 flex items-start gap-2 rounded-xl px-4 py-3 text-sm ${
                   formStatus.success
-                    ? "border border-forest/20 bg-mint text-forest-deep"
+                    ? "border border-brand/20 bg-sky text-brand-deep"
                     : "border border-red-200 bg-red-50 text-red-800"
                 }`}
               >
@@ -283,7 +321,7 @@ const ContactSection = () => {
                   onChange={handleChange}
                   rows={6}
                   className="field resize-y"
-                  placeholder="What is broken today? Which tools do you use? Any timeline?"
+                  placeholder="What is broken today? Which tools do you use (Power BI, Tableau, Spark, warehouses…)? Any timeline?"
                   required
                 />
               </div>

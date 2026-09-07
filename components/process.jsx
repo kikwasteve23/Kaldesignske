@@ -26,7 +26,7 @@ const ProcessSection = () => {
     <section id="process" className="section-pad bg-ink text-white">
       <div className="container-shell">
         <div className="max-w-2xl">
-          <p className="eyebrow !text-[#9dceb8]">How we work</p>
+          <p className="eyebrow !text-[#8eb7d4]">How we work</p>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             A simple path from messy data to a working system.
           </h2>
@@ -40,9 +40,9 @@ const ProcessSection = () => {
           {steps.map((item, index) => (
             <div key={item.step} className="relative">
               {index < steps.length - 1 && (
-                <div className="pointer-events-none absolute left-12 right-0 top-5 hidden h-px bg-gradient-to-r from-[#3f8f6a] to-transparent xl:block" />
+                <div className="pointer-events-none absolute left-12 right-0 top-5 hidden h-px bg-gradient-to-r from-[#03548b] to-transparent xl:block" />
               )}
-              <div className="font-display text-sm font-bold tracking-[0.2em] text-[#7fbf9a]">
+              <div className="font-display text-sm font-bold tracking-[0.2em] text-[#7eaccc]">
                 {item.step}
               </div>
               <h3 className="mt-4 font-display text-2xl font-bold">{item.title}</h3>

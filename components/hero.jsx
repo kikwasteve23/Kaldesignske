@@ -24,7 +24,7 @@ const HeroSection = () => {
     <section id="hero" className="relative min-h-[100svh] overflow-hidden bg-ink text-white">
       <div className="absolute inset-0">
         <div
-          className={`absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#1f6b4a_0%,transparent_42%),linear-gradient(135deg,#0b1711_0%,#163226_55%,#0f1c18_100%)] transition-opacity duration-700 ${
+          className={`absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#03548b_0%,transparent_42%),linear-gradient(135deg,#061525_0%,#0c2a45_55%,#0a1f33_100%)] transition-opacity duration-700 ${
             ready ? "opacity-40" : "opacity-100"
           }`}
         />
@@ -43,8 +43,8 @@ const HeroSection = () => {
         >
           <source src="/assets/images/video1.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07130e]/92 via-[#0d1f18]/72 to-[#102018]/45" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#07130e] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061525]/92 via-[#0a1f33]/72 to-[#0c2a45]/45" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#061525] to-transparent" />
       </div>
 
       <div className="relative z-10 flex min-h-[100svh] items-end pb-16 pt-28 sm:items-center sm:pb-24">

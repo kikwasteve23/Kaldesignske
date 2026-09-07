@@ -5,6 +5,7 @@ import {
   Database,
   Bot,
   Layers,
+  Presentation,
 } from "lucide-react";
 
 const pillars = [
@@ -12,12 +13,12 @@ const pillars = [
     icon: BarChart3,
     title: "Data Analysis",
     summary:
-      "Clean, explore, and explain the numbers behind revenue, operations, and product performance.",
+      "Turn raw operational and product data into decision-ready analysis, BI dashboards, and big-data visualizations stakeholders can trust.",
     items: [
-      "Exploratory analysis & KPI definition",
-      "Dashboards stakeholders actually use",
-      "SQL, Python, and spreadsheet recovery",
-      "Decision-ready reports and narratives",
+      "BI dashboards in Power BI, Tableau, Looker & Metabase",
+      "Big data exploration with Spark, warehouses & lakehouses",
+      "KPI design, SQL analysis, and Python reporting",
+      "Executive-ready visuals and narrative insights",
     ],
   },
   {
@@ -47,8 +48,9 @@ const pillars = [
 ];
 
 const stack = [
-  { icon: Database, label: "Python · SQL · Pandas" },
-  { icon: Bot, label: "Automation · APIs · Scripts" },
+  { icon: Presentation, label: "Power BI · Tableau · Looker" },
+  { icon: Database, label: "SQL · Spark · Warehouses" },
+  { icon: Bot, label: "Python · Automation · APIs" },
   { icon: Layers, label: "Next.js · React · Cloud" },
 ];
 
@@ -72,7 +74,7 @@ const ServicesSection = () => {
             const Icon = pillar.icon;
             return (
               <article key={pillar.title} className="border-t border-ink/15 pt-8">
-                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-forest text-white">
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
                   <Icon size={22} />
                 </div>
                 <h3 className="font-display text-2xl font-bold text-ink">{pillar.title}</h3>
@@ -80,7 +82,7 @@ const ServicesSection = () => {
                 <ul className="mt-6 space-y-3">
                   {pillar.items.map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-ink-soft">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -90,7 +92,7 @@ const ServicesSection = () => {
           })}
         </div>
 
-        <div className="mt-16 flex flex-wrap gap-4 border-y border-[var(--line)] py-6">
+        <div className="mt-16 flex flex-wrap gap-x-6 gap-y-3 border-y border-[var(--line)] py-6">
           {stack.map((item) => {
             const Icon = item.icon;
             return (
@@ -98,7 +100,7 @@ const ServicesSection = () => {
                 key={item.label}
                 className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft"
               >
-                <Icon size={16} className="text-forest" />
+                <Icon size={16} className="text-brand" />
                 {item.label}
               </div>
             );

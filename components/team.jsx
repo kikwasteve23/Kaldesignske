@@ -48,14 +48,14 @@ const Team = () => {
               </div>
               <div>
                 <h3 className="font-display text-2xl font-bold text-ink">{member.name}</h3>
-                <p className="mt-1 font-semibold text-forest">{member.role}</p>
+                <p className="mt-1 font-semibold text-brand">{member.role}</p>
                 <p className="mt-4 leading-relaxed text-[var(--muted)]">{member.description}</p>
                 <div className="mt-5 flex gap-3">
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-brand hover:text-brand"
                   >
                     <Linkedin size={16} />
                     LinkedIn
@@ -64,7 +64,7 @@ const Team = () => {
                     href={member.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-forest hover:text-forest"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[var(--line)] px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-brand hover:text-brand"
                   >
                     <Github size={16} />
                     GitHub
