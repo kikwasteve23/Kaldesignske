@@ -7,7 +7,7 @@ const teamMembers = [
     description:
       "Leads analysis and automation engagements — from cleaning messy sources to shipping pipelines, models, and decision-ready reporting.",
     image: "/assets/kalungu.jpg",
-    linkedin: "https://www.linkedin.com/in/kalungu-steve-a056b6149",
+    linkedin: "https://www.linkedin.com/in/steven-kikwa-a056b6149/",
     github: "https://github.com/kikwasteve23",
   },
   {
