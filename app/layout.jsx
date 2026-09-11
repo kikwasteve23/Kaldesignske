@@ -48,6 +48,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics GA4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-1WRRPNT4T0"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1WRRPNT4T0');
+          `}
+        </Script>
+
+        {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -57,6 +72,8 @@ export default function RootLayout({ children }) {
             })(window,document,'script','dataLayer','GTM-5B8CJWZH');
           `}
         </Script>
+
+        {/* Voiceflow Widget */}
         <Script id="voiceflow-widget" strategy="lazyOnload">
           {`
             (function(d, t) {
